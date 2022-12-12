@@ -41,10 +41,38 @@ def message_schedule():
     s_msg = lst + w
     #print(len(s_msg))
 
-def 
+def rightrotate_7(a):
+    rr_7 = a[25:32] + a[0:25]
+    #print(a)
+    #print(rr_7)
+
+def rightrotate_18(a):
+    rr_18 = a[14:32] + a[0:14]
+    #print(n)
+    #print(rr_18)
+
+def rightrotate_17(a):
+    rr_17 = a[15:32] + a[0:15]
+    #print(a)
+    #print(rr_17)
+
+def rightrotate_19(a):
+    rr_19 = a[13:32] + a[0:13]
+
+def rightshift_3(a):
+    rs_3 = [0, 0, 0] + a[0:29]
+    #print(a)
+    #print(rs_3)
+
+def rightshift_10(a):
+    rs_10 = rs_3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + a[0:22]
+    print(a)
+    print(rs_10)
+    
+
 
 first_step("javad")
-message_schedule()
+
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
