@@ -116,11 +116,19 @@ rightshift_3(w1)
 
 
 #XOR
-#a = rr_18
-#b = rr_7
-#y=int(a,2) ^ int(b,2)
-#print('{0:b}'.format(y))
+a = str_rr_18
+b = str_rr_7
+y=int(a,2) ^ int(b,2)
 
+c = '{0:0{1}b}'.format(y,len(a))
+#print(c)
+d = str_rs_3
+e = int(c,2) ^ int(d,2)
+z = print('{0:0{1}b}'.format(e,len(a)))
+
+print(str_rr_7)
+print(str_rr_18)
+print(str_rs_3)
 
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
