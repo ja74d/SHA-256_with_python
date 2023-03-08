@@ -119,8 +119,6 @@ def rightshift_10(a):
 
 
 #XOR
-#a = str_rr_18
-#b = str_rr_7
 #a and b must be string and executed from rr_* and rs_* functions
 def XOR(a, b):
     global c
@@ -128,18 +126,6 @@ def XOR(a, b):
     c = '{0:0{1}b}'.format(y,len(a))
     #print(c)
 
-
-
-#print(c)
-#d = str_rs_3
-#e = int(c,2) ^ int(d,2)
-
-#rr_118
-#z = print('{0:0{1}b}'.format(e,len(a)))
-
-#print(str_rr_7)
-#print(str_rr_18)
-#print(str_rs_3)
 
 #CALCULATING W16
 #w16 = w0 + σ0 + σ1 + W9
@@ -160,8 +146,18 @@ def sigma0():
     XOR(str_rr_7, str_rr_18)
     XOR(c, str_rs_3)
     print(c)
-sigma0()
+#sigma0()
 
+#CALCULATING SIGMA1
+def sigma1():
+    w(14)
+    rightrotate_17(wn)
+    rightrotate_19(wn)
+    rightshift_10(wn)
+    XOR(str_rr_17, str_rr_19)
+    XOR(c, str_rs_10)
+    print(c)
+sigma1()
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
