@@ -32,6 +32,7 @@ def first_step(in_str):
     lst = lst[0:512]
     #print(lst)
 
+
 def message_schedule():
     v = 0
     w = []
@@ -124,12 +125,29 @@ c = '{0:0{1}b}'.format(y,len(a))
 #print(c)
 d = str_rs_3
 e = int(c,2) ^ int(d,2)
-z = print('{0:0{1}b}'.format(e,len(a)))
 
-print(str_rr_7)
-print(str_rr_18)
-print(str_rs_3)
+#rr_118
+#z = print('{0:0{1}b}'.format(e,len(a)))
 
+#print(str_rr_7)
+#print(str_rr_18)
+#print(str_rs_3)
+
+#CALCULATING W16
+#w16 = w0 + σ0 + σ1 + W9
+def w(n):
+    x = (n + 1) * 32
+    wn = lst[x-32:x]
+    print(wn)
+w(2)
+
+w1 = lst[32:64]
+
+w0 = lst[0:32]
+#print(w0)
+
+def sigma0():
+    rr_7(w1)
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
