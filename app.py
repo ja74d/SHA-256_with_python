@@ -44,6 +44,13 @@ def message_schedule():
 
 first_step("javad")
 
+#w(n)
+def w(n):
+    global wn
+    x = (n + 1) * 32
+    wn = lst[x-32:x]
+    #print(wn)
+
 
 #RIGHTROTATES
 
@@ -107,24 +114,25 @@ def rightshift_10(a):
         str_rs_10 = str_rs_10+str(i)
     
 
+
 #STEP TWO
-w1 = lst[32:64]
-
-rightrotate_7(w1)
-rightrotate_18(w1)
-rightshift_3(w1)
-
 
 
 #XOR
-a = str_rr_18
-b = str_rr_7
-y=int(a,2) ^ int(b,2)
+#a = str_rr_18
+#b = str_rr_7
+#a and b must be string and executed from rr_* and rs_* functions
+def XOR(a, b):
+    global c
+    y=int(a,2) ^ int(b,2)
+    c = '{0:0{1}b}'.format(y,len(a))
+    #print(c)
 
-c = '{0:0{1}b}'.format(y,len(a))
+
+
 #print(c)
-d = str_rs_3
-e = int(c,2) ^ int(d,2)
+#d = str_rs_3
+#e = int(c,2) ^ int(d,2)
 
 #rr_118
 #z = print('{0:0{1}b}'.format(e,len(a)))
@@ -135,19 +143,25 @@ e = int(c,2) ^ int(d,2)
 
 #CALCULATING W16
 #w16 = w0 + σ0 + σ1 + W9
-def w(n):
-    x = (n + 1) * 32
-    wn = lst[x-32:x]
-    print(wn)
-w(2)
+
+
 
 w1 = lst[32:64]
 
 w0 = lst[0:32]
 #print(w0)
 
+#CALCULAT SIGMA0
 def sigma0():
-    rr_7(w1)
+    w(1)
+    rightrotate_7(wn)
+    rightrotate_18(wn)
+    rightshift_3(wn)
+    XOR(str_rr_7, str_rr_18)
+    XOR(c, str_rs_3)
+    print(c)
+sigma0()
+
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
@@ -158,4 +172,12 @@ h4 = 0x510e527f
 h5 = 0x9b05688c
 h6 = 0x1f83d9ab
 h7 = 0x5be0cd19
+
+w(0)
+w1 = wn
+#print(w1)
+
+w(1)
+w2 = wn
+#print(w2)
 
