@@ -140,24 +140,77 @@ w0 = lst[0:32]
 #CALCULAT SIGMA0
 def sigma0():
     w(1)
+    global sigma0_list
+    global c0
     rightrotate_7(wn)
     rightrotate_18(wn)
     rightshift_3(wn)
     XOR(str_rr_7, str_rr_18)
     XOR(c, str_rs_3)
-    print(c)
+    c0 = c
+    #print("sigma0: "+c)
+    sigma0_list = []
+    for i in c:
+        sigma0_list.append(int(i))
+    #print(sigma0_list)
+
 #sigma0()
 
 #CALCULATING SIGMA1
 def sigma1():
     w(14)
+    global sigma1_list
+    global c1
     rightrotate_17(wn)
     rightrotate_19(wn)
     rightshift_10(wn)
     XOR(str_rr_17, str_rr_19)
     XOR(c, str_rs_10)
-    print(c)
+    c1 = c
+    #print("simga1: "+c)
+    sigma1_list = []
+    for i in c:
+        sigma1_list.append(int(i))
+    #print(sigma1_list)
+
+sigma0()
+
+#print(c0)
+
 sigma1()
+
+#print(c1)
+
+result1 = int(c0, 2) + int(c1, 2)
+#binary_result = bin(result1)[2:]
+
+
+w(0)
+w0 = wn
+w0 = ''.join(str(x) for x in w0)
+#print(w0)
+
+
+w(9)
+w9 = wn
+w9 = ''.join(str(x) for x in w9)
+#print(w9)
+
+result2 = int(w0, 2) + int(w9, 2)
+#binary_result = bin(result2)[2:]
+
+result = result1 + result2
+
+#result1 = int(c0, 2) + int(c1, 2)
+binary_result = bin(result)[2:]
+if len(binary_result) < 32:
+    binary_result = "0" + binary_result
+#print(binary_result)
+w16 = binary_result
+for i in w16:
+    lst.append(i)
+w(16)
+print(len(wn))
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
@@ -169,11 +222,6 @@ h5 = 0x9b05688c
 h6 = 0x1f83d9ab
 h7 = 0x5be0cd19
 
-w(0)
-w1 = wn
-#print(w1)
 
-w(1)
-w2 = wn
-#print(w2)
+
 
