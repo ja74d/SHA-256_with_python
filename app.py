@@ -176,7 +176,7 @@ for s in range(0, 48):
     
     sigma1(s)
 
-    result1 = int(c0, 2) + int(c1, 2)
+    #result1 = int(c0, 2) + int(c1, 2)
 
     w(0 + s)
     w0 = wn
@@ -186,20 +186,43 @@ for s in range(0, 48):
     w9 = wn
     w9 = ''.join(str(x) for x in w9)
 
-    result2 = int(w0, 2) + int(w9, 2)
+    #result2 = int(w0, 2) + int(w9, 2)
 
-    result = result1 + result2
+    #result = result1 + result2
 
-    binary_result = bin(result)[2:]
+    #binary_result = bin(result)[2:]
+    # 
+    def binary_sum(a, b):
+        global result 
+        global max_len
+        max_len = max(len(a), len(b))
+        a = a.zfill(max_len)
+        b = b.zfill(max_len)
+        carry = 0
+        result = ""
+        for i in range(max_len-1, -1, -1):
+            bit_sum = int(a[i]) ^ int(b[i]) ^ carry
+            result = str(bit_sum) + result
+            carry = (int(a[i]) & int(b[i])) | (int(a[i]) & carry) | (int(b[i]) & carry)
+        #if carry:
+        #    result = '1' + result
+        return result.zfill(max_len)
             
-    if len(binary_result) < 32:
-        q = 32 - len(binary_result)
-        binary_result = str(q*0) + binary_result
-
-    ws = binary_result
+    #if len(binary_result) < 32:
+    #    q = 32 - len(binary_result)
+    #    binary_result = str(q*0) + binary_result
+    binary_sum(w0, w9)
+    result1 = result.zfill(max_len)
+    binary_sum(c0, c1)
+    result2 = result.zfill(max_len)
+    binary_sum(result1, result2)
+    ws = result.zfill(max_len)
     #print(ws)
     for z in ws:
         lst.append(int(z))
+#print(lst)
+w(63)
+print(wn)
 print(len(lst))
 
 
@@ -212,7 +235,3 @@ h4 = 0x510e527f
 h5 = 0x9b05688c
 h6 = 0x1f83d9ab
 h7 = 0x5be0cd19
-
-
-
-
