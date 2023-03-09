@@ -30,6 +30,11 @@ def first_step(in_str):
     lst[-int(len(big_endian)):0] = big_endian
     
     lst = lst[0:512]
+    lst15 = lst[480:512]
+    w15 = []
+    for w in lst15:
+        w15.append(int(w))
+    lst[480:512] = w15
     #print(lst)
 
 
@@ -50,6 +55,9 @@ def w(n):
     x = (n + 1) * 32
     wn = lst[x-32:x]
     #print(wn)
+
+#this block converts lst[480:512] from str to int
+
 
 
 #RIGHTROTATES
@@ -132,85 +140,68 @@ def XOR(a, b):
 
 
 
-w1 = lst[32:64]
+for s in range(0, 48):
+    def sigma0(s):
+        w(1 + s)
+        global c0
+        rightrotate_7(wn)
+        rightrotate_18(wn)
+        rightshift_3(wn)
+        XOR(str_rr_7, str_rr_18)
+        XOR(c, str_rs_3)
+        c0 = c
+        #print("sigma0: "+c)
+        sigma0_list = []
+        for i in c0:
+            sigma0_list.append(int(i))
+        #print(sigma0_list)
+    sigma0(s)
 
-w0 = lst[0:32]
-#print(w0)
+    #CALCULATING SIGMA1
+    def sigma1(s):
+        w(14 + s)
+        #print(wn)
+        global c1
+        rightrotate_17(wn)
+        rightrotate_19(wn)
+        rightshift_10(wn)
+        XOR(str_rr_17, str_rr_19)
+        XOR(c, str_rs_10)
+        c1 = c
+        #print("simga1: "+c)
+        sigma1_list = []
+        for i in c1:
+            sigma1_list.append(int(i))
+        #print(sigma1_list)
+    
+    sigma1(s)
 
-#CALCULAT SIGMA0
-def sigma0():
-    w(1)
-    global sigma0_list
-    global c0
-    rightrotate_7(wn)
-    rightrotate_18(wn)
-    rightshift_3(wn)
-    XOR(str_rr_7, str_rr_18)
-    XOR(c, str_rs_3)
-    c0 = c
-    #print("sigma0: "+c)
-    sigma0_list = []
-    for i in c:
-        sigma0_list.append(int(i))
-    #print(sigma0_list)
+    result1 = int(c0, 2) + int(c1, 2)
 
-#sigma0()
+    w(0 + s)
+    w0 = wn
+    w0 = ''.join(str(x) for x in w0)
 
-#CALCULATING SIGMA1
-def sigma1():
-    w(14)
-    global sigma1_list
-    global c1
-    rightrotate_17(wn)
-    rightrotate_19(wn)
-    rightshift_10(wn)
-    XOR(str_rr_17, str_rr_19)
-    XOR(c, str_rs_10)
-    c1 = c
-    #print("simga1: "+c)
-    sigma1_list = []
-    for i in c:
-        sigma1_list.append(int(i))
-    #print(sigma1_list)
+    w(9 + s)
+    w9 = wn
+    w9 = ''.join(str(x) for x in w9)
 
-sigma0()
+    result2 = int(w0, 2) + int(w9, 2)
 
-#print(c0)
+    result = result1 + result2
 
-sigma1()
+    binary_result = bin(result)[2:]
+            
+    if len(binary_result) < 32:
+        q = 32 - len(binary_result)
+        binary_result = str(q*0) + binary_result
 
-#print(c1)
+    ws = binary_result
+    #print(ws)
+    for z in ws:
+        lst.append(int(z))
+print(len(lst))
 
-result1 = int(c0, 2) + int(c1, 2)
-#binary_result = bin(result1)[2:]
-
-
-w(0)
-w0 = wn
-w0 = ''.join(str(x) for x in w0)
-#print(w0)
-
-
-w(9)
-w9 = wn
-w9 = ''.join(str(x) for x in w9)
-#print(w9)
-
-result2 = int(w0, 2) + int(w9, 2)
-#binary_result = bin(result2)[2:]
-
-result = result1 + result2
-
-#result1 = int(c0, 2) + int(c1, 2)
-binary_result = bin(result)[2:]
-if len(binary_result) < 32:
-    binary_result = "0" + binary_result
-#print(binary_result)
-w16 = binary_result
-for i in w16:
-    lst.append(i)
-w(16)
-print(len(wn))
 
 #HASH values 2, 3, 5, 7, 11, 13, 17, 19
 h0 = 0x6a09e667
